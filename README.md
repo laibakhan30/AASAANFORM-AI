@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # PatraPilot AI
 
 **Understand every field. Fill with confidence.**
@@ -173,3 +174,7 @@ This project is licensed under the Apache License 2.0 - see the `LICENSE` file f
 - Gemma 4 team for creating the open-weight model
 - Poona College CodeCraft 2026 organizers
 - Open-source community for the tools and libraries used
+=======
+# form-sathi
+AI-powered assistant for understanding and completing forms
+>>>>>>> origin/main
