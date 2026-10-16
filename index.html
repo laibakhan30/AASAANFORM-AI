@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AasaanForm AI — Understand every field. Fill with confidence.</title>
+  <link rel="stylesheet" href="styles.css" />
+<base target="_blank">
+</head>
+<body>
+  <!-- ===== Header ===== -->
+  <header class="app-header no-print">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-logo" aria-hidden="true">📋</span>
+        <div class="brand-text">
+          <h1 data-i18n="appName">AasaanForm AI</h1>
+          <p class="tagline" data-i18n="tagline">Understand every field. Fill with confidence.</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="voiceBtn" class="icon-btn" data-i18n-title="voiceHint" title="Read instructions aloud" aria-label="Read instructions aloud">🔊</button>
+        <div class="lang-toggle" role="group" aria-label="Language">
+          <button id="langEn" class="lang-btn active" aria-pressed="true">EN</button>
+          <button id="langHi" class="lang-btn" aria-pressed="false">हिंदी</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Stepper ===== -->
+  <nav class="stepper no-print" aria-label="Progress">
+    <ol id="stepperList">
+      <li class="step active" data-step="1"><span class="step-num">1</span><span class="step-label" data-i18n="step1">Choose Form</span></li>
+      <li class="step" data-step="2"><span class="step-num">2</span><span class="step-label" data-i18n="step2">Upload Documents</span></li>
+      <li class="step" data-step="3"><span class="step-num">3</span><span class="step-label" data-i18n="step3">Verify &amp; Edit</span></li>
+      <li class="step" data-step="4"><span class="step-num">4</span><span class="step-label" data-i18n="step4">Print / Download</span></li>
+    </ol>
+  </nav>
+
+  <main class="container no-print">
+    <!-- ===== Step 1: Select form + mode ===== -->
+    <section id="step-1" class="panel step-panel">
+      <h2 data-i18n="chooseForm">Select a supported form</h2>
+      <p class="hint" data-i18n="chooseFormHint">We currently support one sample form. More templates are coming soon.</p>
+      <div id="formCards" class="form-cards"></div>
+
+      <div id="modeWrap" class="hidden">
+        <h3 class="checklist-title" data-i18n="modeTitle">How would you like to fill this form?</h3>
+        <div class="mode-cards">
+          <button type="button" id="modeAi" class="mode-card">
+            <span class="mc-icon" aria-hidden="true">🤖</span>
+            <span class="mc-name" data-i18n="modeAiTitle">AI fills it for me</span>
+            <span class="mc-desc" data-i18n="modeAiDesc">Upload your documents — AI reads them, asks you a few questions by voice, and fills the form.</span>
+          </button>
+          <button type="button" id="modeSelf" class="mode-card">
+            <span class="mc-icon" aria-hidden="true">✍️</span>
+            <span class="mc-name" data-i18n="modeSelfTitle">I will fill it myself</span>
+            <span class="mc-desc" data-i18n="modeSelfDesc">Voice-guided walkthrough — the app explains each section of the form step by step.</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="docChecklistWrap" class="hidden">
+        <h3 class="checklist-title" data-i18n="requiredDocs">Documents you will need</h3>
+        <ul id="docChecklist" class="doc-checklist"></ul>
+      </div>
+
+      <div class="panel-actions">
+        <button id="toStep2" class="btn btn-primary hidden" data-i18n="continue">Continue</button>
+      </div>
+    </section>
+
+    <!-- ===== Step 2: Voice-guided upload ===== -->
+    <section id="step-2" class="panel step-panel hidden">
+      <h2 data-i18n="uploadDoc">Upload your documents</h2>
+      <p class="hint" data-i18n="uploadHint">Our voice assistant will guide you one document at a time. Fictional demo data is used in this preview.</p>
+
+      <div id="voicePrompt" class="voice-prompt hidden">
+        <button id="replayPrompt" class="icon-btn small" aria-label="Replay instruction">🔊</button>
+        <span id="voicePromptText"></span>
+      </div>
+
+      <ul id="docChecklistLive" class="doc-checklist compact"></ul>
+
+      <div class="no-verify-note">
+        <span aria-hidden="true">ℹ️</span>
+        <span data-i18n="noVerifyNote">Documents are only read to help fill this form. They are <strong>not verified</strong> against any bank or government database.</span>
+      </div>
+
+      <div id="dropZone" class="drop-zone" tabindex="0" role="button" aria-label="Upload documents">
+        <div class="drop-icon" aria-hidden="true">📄</div>
+        <p class="drop-title" data-i18n="dropTitle">Tap to choose files, or drag &amp; drop</p>
+        <p class="drop-sub" data-i18n="dropSub">Images (JPG/PNG) or PDFs · Max 10 MB each · Your files stay on this device in demo mode</p>
+        <input type="file" id="fileInput" accept="image/*,application/pdf" multiple hidden />
+      </div>
+
+      <div class="upload-alt">
+        <label class="btn btn-secondary btn-camera">
+          📷 <span data-i18n="takePhoto">Take a photo</span>
+          <input type="file" id="cameraInput" accept="image/*" capture="environment" hidden />
+        </label>
+        <button id="useDemoBtn" class="btn btn-ghost" data-i18n="useDemo">Use demo documents instead</button>
+      </div>
+
+      <div id="fileList" class="file-list"></div>
+
+      <div id="analyzeState" class="analyze-state hidden">
+        <div class="spinner" aria-hidden="true"></div>
+        <p data-i18n="analyzing">Reading your documents with AI…</p>
+      </div>
+
+      <div id="uploadError" class="alert alert-error hidden" role="alert"></div>
+
+      <div class="panel-actions">
+        <button id="backTo1" class="btn btn-ghost" data-i18n="back">Back</button>
+        <button id="analyzeBtn" class="btn btn-primary" disabled data-i18n="analyze">Extract &amp; fill form</button>
+      </div>
+    </section>
+
+    <!-- ===== Step 3: Editable verify ===== -->
+    <section id="step-3" class="panel step-panel hidden">
+      <div class="review-header">
+        <div>
+          <h2 data-i18n="reviewTitle">Verify &amp; edit each field</h2>
+          <p class="hint" data-i18n="reviewHint">Check every value before printing. For personal details, listen to the question and tap an option. Nothing is printed without your confirmation.</p>
+        </div>
+        <div class="progress-wrap" aria-live="polite">
+          <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
+          <span id="progressText" class="progress-text">0 / 0</span>
+        </div>
+      </div>
+
+      <div id="summaryBanner" class="summary-banner hidden"></div>
+      <div id="fieldsList" class="fields-list"></div>
+
+      <div class="panel-actions">
+        <button id="backTo2" class="btn btn-ghost" data-i18n="back">Back</button>
+        <button id="toStep4" class="btn btn-primary" disabled data-i18n="generateDraft">Create printable form</button>
+      </div>
+    </section>
+
+    <!-- ===== Step 4: Print / Download ===== -->
+    <section id="step-4" class="panel step-panel hidden">
+      <div class="success-hero">
+        <div class="success-icon" aria-hidden="true">✅</div>
+        <h2 data-i18n="readyTitle">Your form is ready</h2>
+        <p class="hint" data-i18n="readyHint">Below is the final data using only the values you confirmed. Please verify everything before official use.</p>
+      </div>
+      <div id="confirmedSummary" class="confirmed-summary"></div>
+      <div class="panel-actions center">
+        <button id="printBtn" class="btn btn-secondary btn-big" data-i18n="printBtn">🖨️ Print</button>
+        <button id="downloadBtn" class="btn btn-primary btn-big" data-i18n="downloadPdf">Download PDF ⬇</button>
+        <button id="startOver" class="btn btn-ghost" data-i18n="startOver">Start over</button>
+      </div>
+      <p class="fineprint" data-i18n="fineprint">Demo build — data is fictional and this is not an official bank form. Always double-check official forms before submission.</p>
+    </section>
+
+    <!-- ===== Self-fill voice guide ===== -->
+    <section id="guide-panel" class="panel hidden">
+      <h2 data-i18n="guideTitle">Step-by-step form guide</h2>
+      <p class="hint" data-i18n="guideHint">Listen to each instruction, fill that part of the physical form yourself, then mark it done.</p>
+      <div class="guide-progress" id="guideProgress"></div>
+      <div class="guide-card">
+        <h3 id="guideStepTitle"></h3>
+        <p id="guideStepText"></p>
+      </div>
+      <div class="panel-actions">
+        <button id="guidePrev" class="btn btn-ghost" data-i18n="prev">Previous</button>
+        <button id="guideSpeak" class="btn btn-secondary" data-i18n="listenSection">🔊 Listen</button>
+        <button id="guideDone" class="btn btn-primary" data-i18n="markDone">Mark done &amp; next</button>
+      </div>
+      <div class="panel-actions">
+        <button id="guideExit" class="btn btn-ghost" data-i18n="exitGuide">← Back to form selection</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Printable output (only visible when printing) -->
+  <div id="printArea" class="print-only" aria-hidden="true"></div>
+
+  <footer class="app-footer no-print">
+    <p>AasaanForm AI · Hacktoberfest 2026 · <span data-i18n="footerNote">Built with open-weight AI (Gemma)</span></p>
+  </footer>
+
+  <div id="toast" class="toast hidden no-print" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
