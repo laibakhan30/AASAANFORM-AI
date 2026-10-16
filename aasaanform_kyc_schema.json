@@ -1,0 +1,605 @@
+{
+  "schema_version": "1.0",
+  "form_name": "HDFC Bank KYC Application Form (Resident Individuals)",
+  "note": "Use only with the official form supplied by the user. Do not invent values. Fields marked customer_confirmation require explicit customer input/confirmation.",
+  "sections": [
+    {
+      "id": "customer_details",
+      "title": "1. Customer Details"
+    },
+    {
+      "id": "profile_details",
+      "title": "Customer Profile Details"
+    },
+    {
+      "id": "identity_address_proof",
+      "title": "2. (A) Proof of Identity & Current/Permanent Address"
+    },
+    {
+      "id": "contact_details",
+      "title": "3. Contact Details"
+    },
+    {
+      "id": "completion",
+      "title": "Declaration and completion"
+    }
+  ],
+  "status_values": [
+    "matched",
+    "missing",
+    "conflict",
+    "needs_review",
+    "customer_confirmation_required"
+  ],
+  "global_rules": [
+    "Only auto-fill values supported by source documents and validated evidence.",
+    "Never infer a missing personal value from unrelated fields.",
+    "If sources disagree, leave the PDF field blank and flag conflict for user review.",
+    "Customer declarations, consent, tax residency, PEP answers and preferences require explicit customer confirmation.",
+    "Never generate a signature or fabricate a photograph.",
+    "Do not mark original-document verification as complete; this is a bank-only action.",
+    "Sensitive identifiers should be masked in logs and UI where possible."
+  ],
+  "fields": [
+    {
+      "section": "customer_details",
+      "key": "ckyc_identifier",
+      "label": "CKYC Identifier",
+      "type": "text",
+      "source": "supporting_documents",
+      "handling": "extract_or_blank"
+    },
+    {
+      "section": "customer_details",
+      "key": "hdfc_customer_no",
+      "label": "HDFC Customer No.",
+      "type": "text",
+      "source": "customer_input_or_existing_bank_document",
+      "handling": "extract_or_ask"
+    },
+    {
+      "section": "customer_details",
+      "key": "gender",
+      "label": "Gender (M/F/T)",
+      "type": "choice",
+      "source": "document_or_customer_confirmation",
+      "handling": "extract_or_ask"
+    },
+    {
+      "section": "customer_details",
+      "key": "date_of_birth",
+      "label": "Date of Birth",
+      "type": "date",
+      "source": "identity_document",
+      "handling": "extract"
+    },
+    {
+      "section": "customer_details",
+      "key": "name_prefix",
+      "label": "Name - Prefix",
+      "type": "choice",
+      "source": "identity_document",
+      "handling": "extract_or_review"
+    },
+    {
+      "section": "customer_details",
+      "key": "first_name",
+      "label": "Name - First Name",
+      "type": "text",
+      "source": "identity_document",
+      "handling": "extract"
+    },
+    {
+      "section": "customer_details",
+      "key": "middle_name",
+      "label": "Name - Middle Name",
+      "type": "text",
+      "source": "identity_document",
+      "handling": "extract_or_blank"
+    },
+    {
+      "section": "customer_details",
+      "key": "last_name",
+      "label": "Name - Last Name",
+      "type": "text",
+      "source": "identity_document",
+      "handling": "extract"
+    },
+    {
+      "section": "customer_details",
+      "key": "guardian_name",
+      "label": "Guardian's Name (if case of Minor)",
+      "type": "text",
+      "source": "supporting_document_or_customer",
+      "handling": "conditional_extract_or_ask"
+    },
+    {
+      "section": "customer_details",
+      "key": "guardian_customer_no",
+      "label": "Guardian's Customer No. (if case of Minor)",
+      "type": "text",
+      "source": "customer_input_or_bank_document",
+      "handling": "conditional_extract_or_blank"
+    },
+    {
+      "section": "customer_details",
+      "key": "maiden_name",
+      "label": "Maiden Name (if any)",
+      "type": "text",
+      "source": "customer_confirmation_or_document",
+      "handling": "conditional_ask"
+    },
+    {
+      "section": "customer_details",
+      "key": "father_spouse_name",
+      "label": "Father/Spouse Name",
+      "type": "text",
+      "source": "supporting_document_or_customer",
+      "handling": "extract_or_ask"
+    },
+    {
+      "section": "customer_details",
+      "key": "mother_name",
+      "label": "Mother Name",
+      "type": "text",
+      "source": "supporting_document_or_customer",
+      "handling": "extract_or_ask"
+    },
+    {
+      "section": "customer_details",
+      "key": "current_address_line_1",
+      "label": "Current/Permanent Address - Line 1",
+      "type": "text",
+      "source": "address_proof",
+      "handling": "extract"
+    },
+    {
+      "section": "customer_details",
+      "key": "current_address_line_2",
+      "label": "Current/Permanent Address - Line 2",
+      "type": "text",
+      "source": "address_proof",
+      "handling": "extract_or_blank"
+    },
+    {
+      "section": "customer_details",
+      "key": "current_address_line_3",
+      "label": "Current/Permanent Address - Line 3",
+      "type": "text",
+      "source": "address_proof",
+      "handling": "extract_or_blank"
+    },
+    {
+      "section": "customer_details",
+      "key": "current_city",
+      "label": "Current/Permanent Address - City",
+      "type": "text",
+      "source": "address_proof",
+      "handling": "extract"
+    },
+    {
+      "section": "customer_details",
+      "key": "current_pin_code",
+      "label": "Current/Permanent Address - Pin Code",
+      "type": "text",
+      "source": "address_proof",
+      "handling": "extract_and_validate"
+    },
+    {
+      "section": "customer_details",
+      "key": "current_state_ut",
+      "label": "Current/Permanent Address - State/UT",
+      "type": "text",
+      "source": "address_proof",
+      "handling": "extract"
+    },
+    {
+      "section": "customer_details",
+      "key": "current_country",
+      "label": "Current/Permanent Address - Country",
+      "type": "text",
+      "source": "address_proof",
+      "handling": "extract_or_review"
+    },
+    {
+      "section": "customer_details",
+      "key": "correspondence_same_as_current",
+      "label": "Correspondence/Local Address same as Current/Permanent Address",
+      "type": "boolean",
+      "source": "customer_confirmation",
+      "handling": "ask_customer"
+    },
+    {
+      "section": "customer_details",
+      "key": "correspondence_address_line_1",
+      "label": "Correspondence/Local Address - Line 1",
+      "type": "text",
+      "source": "correspondence_address_proof_or_customer",
+      "handling": "extract_or_ask"
+    },
+    {
+      "section": "customer_details",
+      "key": "correspondence_address_line_2",
+      "label": "Correspondence/Local Address - Line 2",
+      "type": "text",
+      "source": "correspondence_address_proof_or_customer",
+      "handling": "extract_or_blank"
+    },
+    {
+      "section": "customer_details",
+      "key": "correspondence_address_line_3",
+      "label": "Correspondence/Local Address - Line 3",
+      "type": "text",
+      "source": "correspondence_address_proof_or_customer",
+      "handling": "extract_or_blank"
+    },
+    {
+      "section": "customer_details",
+      "key": "correspondence_city",
+      "label": "Correspondence/Local Address - City",
+      "type": "text",
+      "source": "correspondence_address_proof_or_customer",
+      "handling": "extract_or_ask"
+    },
+    {
+      "section": "customer_details",
+      "key": "correspondence_pin_code",
+      "label": "Correspondence/Local Address - Pin Code",
+      "type": "text",
+      "source": "correspondence_address_proof_or_customer",
+      "handling": "extract_or_ask"
+    },
+    {
+      "section": "customer_details",
+      "key": "correspondence_state_ut",
+      "label": "Correspondence/Local Address - State/UT",
+      "type": "text",
+      "source": "correspondence_address_proof_or_customer",
+      "handling": "extract_or_ask"
+    },
+    {
+      "section": "customer_details",
+      "key": "correspondence_country",
+      "label": "Correspondence/Local Address - Country",
+      "type": "text",
+      "source": "correspondence_address_proof_or_customer",
+      "handling": "extract_or_ask"
+    },
+    {
+      "section": "customer_details",
+      "key": "city_of_birth",
+      "label": "City of Birth",
+      "type": "text",
+      "source": "document_or_customer_confirmation",
+      "handling": "extract_or_ask"
+    },
+    {
+      "section": "customer_details",
+      "key": "country_of_birth",
+      "label": "Country of Birth",
+      "type": "text",
+      "source": "document_or_customer_confirmation",
+      "handling": "extract_or_ask"
+    },
+    {
+      "section": "customer_details",
+      "key": "pan_number",
+      "label": "PAN No.",
+      "type": "text",
+      "source": "pan_document_or_reliable_supporting_document",
+      "handling": "extract_and_validate"
+    },
+    {
+      "section": "customer_details",
+      "key": "nationality",
+      "label": "Nationality",
+      "type": "text",
+      "source": "document_or_customer_confirmation",
+      "handling": "extract_or_ask"
+    },
+    {
+      "section": "customer_details",
+      "key": "citizenship",
+      "label": "Citizenship",
+      "type": "text",
+      "source": "document_or_customer_confirmation",
+      "handling": "extract_or_ask"
+    },
+    {
+      "section": "customer_details",
+      "key": "non_india_tax_resident_declaration",
+      "label": "I am not a tax-resident of any country other than India",
+      "type": "boolean",
+      "source": "customer_confirmation",
+      "handling": "ask_customer"
+    },
+    {
+      "section": "profile_details",
+      "key": "occupation",
+      "label": "Occupation",
+      "type": "choice",
+      "source": "customer_confirmation_or_reliable_document",
+      "handling": "extract_or_ask"
+    },
+    {
+      "section": "profile_details",
+      "key": "employer_category",
+      "label": "If salaried, employed with",
+      "type": "choice_or_text",
+      "source": "customer_confirmation",
+      "handling": "ask_if_applicable"
+    },
+    {
+      "section": "profile_details",
+      "key": "employer_name",
+      "label": "Employer/Company name",
+      "type": "text",
+      "source": "customer_input",
+      "handling": "ask_if_applicable"
+    },
+    {
+      "section": "profile_details",
+      "key": "self_employed_since_years",
+      "label": "Self Employed since - Years",
+      "type": "integer",
+      "source": "customer_input",
+      "handling": "ask_if_applicable"
+    },
+    {
+      "section": "profile_details",
+      "key": "self_employed_since_months",
+      "label": "Self Employed since - Months",
+      "type": "integer",
+      "source": "customer_input",
+      "handling": "ask_if_applicable"
+    },
+    {
+      "section": "profile_details",
+      "key": "nature_of_business",
+      "label": "Nature of Business",
+      "type": "choice_or_text",
+      "source": "customer_confirmation",
+      "handling": "ask_if_applicable"
+    },
+    {
+      "section": "profile_details",
+      "key": "date_of_incorporation",
+      "label": "Date of Incorporation",
+      "type": "date",
+      "source": "business_document",
+      "handling": "extract_if_applicable"
+    },
+    {
+      "section": "profile_details",
+      "key": "company_firm_type",
+      "label": "Type of Company/Firm",
+      "type": "choice_or_text",
+      "source": "business_document_or_customer",
+      "handling": "extract_or_ask_if_applicable"
+    },
+    {
+      "section": "profile_details",
+      "key": "self_employed_professional",
+      "label": "Self Employed Professional",
+      "type": "choice",
+      "source": "customer_confirmation",
+      "handling": "ask_if_applicable"
+    },
+    {
+      "section": "profile_details",
+      "key": "source_of_funds",
+      "label": "Source of funds",
+      "type": "choice_or_text",
+      "source": "customer_confirmation",
+      "handling": "ask_customer"
+    },
+    {
+      "section": "profile_details",
+      "key": "gross_annual_income_range",
+      "label": "Gross Annual Income (₹)",
+      "type": "choice",
+      "source": "customer_confirmation",
+      "handling": "ask_customer"
+    },
+    {
+      "section": "profile_details",
+      "key": "qualification",
+      "label": "Qualification",
+      "type": "choice",
+      "source": "customer_confirmation_or_document",
+      "handling": "ask_or_extract"
+    },
+    {
+      "section": "profile_details",
+      "key": "marital_status",
+      "label": "Marital Status",
+      "type": "choice",
+      "source": "customer_confirmation",
+      "handling": "ask_customer"
+    },
+    {
+      "section": "profile_details",
+      "key": "residence_type",
+      "label": "Residence type",
+      "type": "choice",
+      "source": "customer_confirmation",
+      "handling": "ask_customer"
+    },
+    {
+      "section": "profile_details",
+      "key": "politically_exposed_person",
+      "label": "Politically Exposed Person (PEP)",
+      "type": "boolean",
+      "source": "customer_confirmation",
+      "handling": "ask_customer"
+    },
+    {
+      "section": "profile_details",
+      "key": "relative_of_pep",
+      "label": "Relative of PEP",
+      "type": "boolean",
+      "source": "customer_confirmation",
+      "handling": "ask_customer"
+    },
+    {
+      "section": "identity_address_proof",
+      "key": "identity_proof_type",
+      "label": "Proof of Identity",
+      "type": "choice",
+      "source": "uploaded_document",
+      "handling": "detect_and_review"
+    },
+    {
+      "section": "identity_address_proof",
+      "key": "address_proof_type",
+      "label": "Proof of Address",
+      "type": "choice",
+      "source": "uploaded_document",
+      "handling": "detect_and_review"
+    },
+    {
+      "section": "identity_address_proof",
+      "key": "aadhaar_number",
+      "label": "Aadhaar Card/PVC Card number",
+      "type": "text",
+      "source": "aadhaar_document_if_supplied",
+      "handling": "extract_mask_and_review"
+    },
+    {
+      "section": "identity_address_proof",
+      "key": "passport_number",
+      "label": "Passport No.",
+      "type": "text",
+      "source": "passport_if_supplied",
+      "handling": "extract_if_applicable"
+    },
+    {
+      "section": "identity_address_proof",
+      "key": "driving_license_number",
+      "label": "Permanent Driving License No.",
+      "type": "text",
+      "source": "driving_license_if_supplied",
+      "handling": "extract_if_applicable"
+    },
+    {
+      "section": "identity_address_proof",
+      "key": "voter_id_number",
+      "label": "Election/Voter's card number",
+      "type": "text",
+      "source": "voter_id_if_supplied",
+      "handling": "extract_if_applicable"
+    },
+    {
+      "section": "identity_address_proof",
+      "key": "job_card_details",
+      "label": "NREGA Job Card details",
+      "type": "text",
+      "source": "job_card_if_supplied",
+      "handling": "extract_if_applicable"
+    },
+    {
+      "section": "identity_address_proof",
+      "key": "npr_letter_details",
+      "label": "National Population Register letter details",
+      "type": "text",
+      "source": "npr_letter_if_supplied",
+      "handling": "extract_if_applicable"
+    },
+    {
+      "section": "identity_address_proof",
+      "key": "proof_expiry_date",
+      "label": "Expiry Date",
+      "type": "date",
+      "source": "selected_document_if_applicable",
+      "handling": "extract_or_blank"
+    },
+    {
+      "section": "contact_details",
+      "key": "mobile_number",
+      "label": "Mobile (+91 printed on form)",
+      "type": "text",
+      "source": "supporting_document_or_customer",
+      "handling": "extract_or_ask"
+    },
+    {
+      "section": "contact_details",
+      "key": "email_id",
+      "label": "Email ID",
+      "type": "text",
+      "source": "customer_input_or_supporting_document",
+      "handling": "extract_or_ask"
+    },
+    {
+      "section": "contact_details",
+      "key": "residential_telephone",
+      "label": "Tel. (Res.)",
+      "type": "text",
+      "source": "customer_input",
+      "handling": "ask_or_blank"
+    },
+    {
+      "section": "contact_details",
+      "key": "office_telephone",
+      "label": "Tel. (Off.)",
+      "type": "text",
+      "source": "customer_input",
+      "handling": "ask_or_blank"
+    },
+    {
+      "section": "contact_details",
+      "key": "tax_to_be_deducted",
+      "label": "Tax to be deducted - Yes/No",
+      "type": "boolean",
+      "source": "customer_confirmation",
+      "handling": "ask_customer"
+    },
+    {
+      "section": "contact_details",
+      "key": "interest_in_other_hdfc_products",
+      "label": "Interested in other HDFC Bank products - Yes/No",
+      "type": "boolean",
+      "source": "customer_confirmation",
+      "handling": "ask_customer"
+    },
+    {
+      "section": "completion",
+      "key": "place",
+      "label": "Place",
+      "type": "text",
+      "source": "customer_confirmation",
+      "handling": "ask_or_blank"
+    },
+    {
+      "section": "completion",
+      "key": "date",
+      "label": "Date",
+      "type": "date",
+      "source": "customer_confirmation",
+      "handling": "ask_or_blank"
+    },
+    {
+      "section": "completion",
+      "key": "signature",
+      "label": "Signature",
+      "type": "signature",
+      "source": "customer",
+      "handling": "always_leave_blank"
+    },
+    {
+      "section": "completion",
+      "key": "passport_photo",
+      "label": "Passport-size photograph",
+      "type": "image",
+      "source": "customer",
+      "handling": "always_leave_blank"
+    },
+    {
+      "section": "completion",
+      "key": "declaration_acceptance",
+      "label": "Declaration acceptance",
+      "type": "boolean",
+      "source": "customer",
+      "handling": "customer_must_review_and_accept"
+    }
+  ]
+}

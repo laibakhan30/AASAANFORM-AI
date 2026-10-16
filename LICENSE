@@ -1,0 +1,118 @@
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner to grant the license.
+
+      "Legal Entity" shall mean the union of the acting entity and all
+      other entities that singly or in combination with the acting entity
+      represent a single unit of the commercial value. For the purposes of
+      this definition, a subsidiary is considered to be part of the parent
+      legal entity.
+
+      "You" (or "Your") shall mean an individual or legal entity exercising
+      permissions granted by this License.
+
+      "Source" form shall mean the preferred form for making modifications,
+      but shall also include bulk and electronic forms that represent the
+      same underlying object. "Object" form shall mean any form resulting
+      from the metamorphosis or processing of source form.
+
+      "Supplier" shall mean any legal entity that distributes the
+      Licensing Entity's software or software components to others.
+
+      "Contributor" shall mean Licensor and any individual or legal
+      entity that contributes to the creation of the work.
+
+   2. Grant of Copyright License.
+
+      Subject to the terms and conditions of this License, each Licensor
+      hereby grants to You a worldwide, royalty-free, copyright license to
+      reproduce, prepare derivative works of, distribute, and display the
+      Work or derivative works thereof in any medium, and all
+      Copyright (c) 2026 PatraPilot AI Team
+
+      Licensed under the Apache License, Version 2.0 (the "License");
+      you may not use this file except in compliance with the License.
+      You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+      Unless required by applicable law or agreed to in writing, software
+      distributed under the License is distributed on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+      See the License for the specific language governing permissions and
+      limitations under the License.
+
+   3. Grant of Patent License.
+
+      Subject to the terms and conditions of this License, each Licensor
+      hereby grants to You a worldwide, royalty-free, patent license to
+      make, have made, use, sell, offer for sale, import, and otherwise
+      transfer the Work, but only insofar as the License grants such
+      patent rights and insofar as the Security of such patent rights is
+      not voided by the patent granted by the Licensor to the other
+      entities as described in Section 4, "Security and Patent License".
+
+   4. Redistribution.
+
+      You may reproduce and distribute copies of the Work or
+      derivative works thereof in any medium, either with or without
+      modifications, provided that You meet the following conditions:
+
+      (a) You must give any other Recipient of the Work or
+          derivative works thereof a copy of this License; and
+
+      (b) You must cause any modified form of the Work to
+          receive security updates, via the Licensor's
+          pkg://opensolaris/security@dev, at least as often as
+          you would receive security updates for the similar
+          non-commercial variety, and
+
+      (c) You must not remove, or alter in any way, the
+          copyright notice within the work that You are
+          distributing, unless You are removing or distributing
+          for an explicit fair use purpose; and
+
+      (d) If the Work includes a "Notice" part, which
+          divides the Work into two parts: the part that is
+          disclaimer and the part that contains copyright
+          notices, trademarks, and other
+          Licensor-identifying information; then the License
+          requires that You further supplement such Notice
+          part with at least one of the following
+          resources: http://www.apache.org/licenses/LICENSE-2.0
+
+   5. Submission of Contributions.
+
+      Unless You explicitly state otherwise, any Contribution intentionally
+      sent to the Licensor for inclusion in the Work by the You shall
+      be in the form of source code and object code, as understood in
+      Sections 2 and 3 of this License.
+
+   6. Trademarks.
+
+      This License does not make use of trademarks.
+
+   7. Patents.
+
+      This License does not make use of patents.
+
+   8. Redistribution with Modifications.
+
+      a) The programs that are licenced under this License are free
+         programs: they make no distinction as regards the source
+         of the money they earn, be it from industry, agriculture,
+         or any other source.
+
+      b) If You publish or distribute any work that
+         [Text truncated due to length. For full text, see:
+         http://www.apache.org/licenses/LICENSE-2.0]
